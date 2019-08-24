@@ -12,7 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 
-@RestController
+@RestController("/order")
 public class OrderTakerResource {
 
     @Autowired
