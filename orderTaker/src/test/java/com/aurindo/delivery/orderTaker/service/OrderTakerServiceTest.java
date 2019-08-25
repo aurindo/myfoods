@@ -43,7 +43,7 @@ public class OrderTakerServiceTest {
     }
 
     @Test
-    public void whenreceiveAcorrectORderShouldReturnNewOrderCode() {
+    public void whenReceiveAcorrectORderShouldReturnNewOrderCode() {
         List<String> items = new ArrayList<>();
         String address = "Torrens av, 123";
         String userCode = UUID.randomUUID().toString();
