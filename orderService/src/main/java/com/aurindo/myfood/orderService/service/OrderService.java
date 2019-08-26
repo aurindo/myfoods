@@ -4,6 +4,6 @@ import com.aurindo.myfood.orderService.model.Order;
 
 public interface OrderService {
 
-    void receiveOrder(Order order);
+    Order receiveOrder(Order order);
 
 }

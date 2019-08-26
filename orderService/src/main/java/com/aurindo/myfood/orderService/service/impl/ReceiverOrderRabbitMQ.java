@@ -3,6 +3,7 @@ package com.aurindo.myfood.orderService.service.impl;
 import com.aurindo.myfood.orderService.exception.OrderException;
 import com.aurindo.myfood.orderService.factory.OrderFactory;
 import com.aurindo.myfood.orderService.model.Order;
+import com.aurindo.myfood.orderService.model.OrderStatus;
 import com.aurindo.myfood.orderService.service.OrderService;
 import com.aurindo.myfood.orderService.service.ReceiverOrderService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -24,6 +25,7 @@ public class ReceiverOrderRabbitMQ implements ReceiverOrderService {
     @RabbitListener(queues = "ordertaker")
     public void receiveMessage(String message) throws OrderException {
         Order order = orderFactory.create(message);
+        order.setStatus(OrderStatus.RECEIVED);
         orderService.receiveOrder(order);
     }
 
