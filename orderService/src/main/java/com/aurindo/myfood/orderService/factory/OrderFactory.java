@@ -33,7 +33,7 @@ public class OrderFactory {
                 products.add(productRepository.findByCode(productCode.textValue()));
             });
 
-            return new Order(code, products, address, userCode, OrderStatus.RECEIVED);
+            return new Order(code, products, address, userCode);
 
         } catch (IOException e) {
             e.printStackTrace();

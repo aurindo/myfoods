@@ -1,8 +1,9 @@
 package com.aurindo.myfood.orderService.model;
 
-import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,9 +16,11 @@ public class Order implements Serializable {
     private Long id;
 
     @NotNull
+    @Column(unique = true)
     private String code;
 
     @NotNull
+    @NotEmpty
     @ManyToMany
     private List<Product> items;
 
@@ -31,6 +34,14 @@ public class Order implements Serializable {
     private OrderStatus status;
 
     public Order() {}
+
+    public Order(String code, List<Product> items, String addressDestination, String userCode) {
+        this.code = code;
+        this.items = items;
+        this.addressDestination = addressDestination;
+        this.userCode = userCode;
+        this.status = OrderStatus.NEW;
+    }
 
     public Order(String code, List<Product> items, String addressDestination, String userCode, OrderStatus status) {
         this.code = code;
