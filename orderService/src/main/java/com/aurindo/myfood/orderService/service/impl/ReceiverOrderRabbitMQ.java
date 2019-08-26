@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReceiverOrderRabbitMQ implements ReceiverOrderService {
 
+    private static final String QUEUE_NAME = "ordertaker";
+
     @Autowired
     private OrderService orderService;
 
@@ -22,7 +24,7 @@ public class ReceiverOrderRabbitMQ implements ReceiverOrderService {
     private OrderFactory orderFactory;
 
     @Override
-    @RabbitListener(queues = "ordertaker")
+    @RabbitListener(queues = QUEUE_NAME)
     public void receiveMessage(String message) throws OrderException {
         Order order = orderFactory.create(message);
         order.setStatus(OrderStatus.RECEIVED);
