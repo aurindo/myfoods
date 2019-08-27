@@ -1,3 +1,4 @@
 server:
-    servlet:
-        contextPath: /ordertaker
+  port: 8082
+  servlet:
+    contextPath: /ordertaker

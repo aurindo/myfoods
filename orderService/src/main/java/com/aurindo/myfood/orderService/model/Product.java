@@ -1,8 +1,8 @@
 package com.aurindo.myfood.orderService.model;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -15,12 +15,15 @@ public class Product implements Serializable {
     private Long id;
 
     @NotNull
+    @Column(unique = true)
     private String code;
 
     @NotNull
+    @Min(0)
     private BigDecimal price;
 
     @NotNull
+    @Min(0)
     private Integer quantity;
 
     public Product() {}

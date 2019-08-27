@@ -9,9 +9,11 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class OrderTakerApplication {
 
+	private static final String QUEUE_NAME = "ordertaker";
+
 	@Bean
 	public Queue getQueue() {
-		return new Queue("ordertaker");
+		return new Queue(QUEUE_NAME);
 	}
 
 	public static void main(String[] args) {

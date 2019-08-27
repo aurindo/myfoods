@@ -1,13 +1,13 @@
-package com.aurindo.myfood.orderService;
+package com.aurindo.delivery.emailService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OrderServiceApplication {
+public class EmailServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OrderServiceApplication.class, args);
+		SpringApplication.run(EmailServiceApplication.class, args);
 	}
 
 }
