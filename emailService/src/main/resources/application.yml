@@ -1,0 +1,20 @@
+server:
+  port: 8081
+  servlet:
+    contextPath: /emailservice
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: aurindo.developer
+    password: Teste1234
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        connectiontimeout: 5000
+        timeout: 5000
+        writetimeout: 5000
