@@ -1,5 +1,6 @@
 package com.aurindo.myfood.orderService.service;
 
+import com.aurindo.myfood.orderService.helper.EmailHelper;
 import com.aurindo.myfood.orderService.model.Order;
 import com.aurindo.myfood.orderService.model.OrderStatus;
 import com.aurindo.myfood.orderService.model.Product;
@@ -27,8 +28,11 @@ public class OrderServiceTest {
     @MockBean
     private OrderRepository orderRepository;
 
+    @MockBean
+    private EmailHelper emailHelper;
+
     @Test
-    public void whenReceiveAnCorrectOrderShouldReturnNothing() {
+    public void whenReceiveAnCorrectOrderShouldReturnNothing() throws Exception {
         String code = "b61449b3-c5f3-4ac7-a60c-6b503357435d";
         List<Product> products = new ArrayList<>();
         String address = "Torrens Av";
@@ -45,6 +49,8 @@ public class OrderServiceTest {
         TestCase.assertEquals(OrderStatus.RECEIVED, savedOrder.getStatus());
 
         Mockito.verify(orderRepository, Mockito.times(1)).save(order);
+        Mockito.verify(emailHelper, Mockito.times(1)).sendEmail(
+                "aurindo@gmail.com", "Subject Test", "Only a test message");
     }
 
 }
