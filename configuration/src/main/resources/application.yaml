@@ -1,0 +1,16 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config
+  security:
+    user:
+      name: root
+      password: root
+      role: SYSTEM
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://Users/aurindoferreira/Documents/aurindo/study/config-repo
+          clone-on-start: true
