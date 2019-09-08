@@ -11,4 +11,4 @@ spring:
       server:
         git:
           uri: file://Users/aurindoferreira/Documents/aurindo/study/config-repo
-          clone-on-start: true
+          clone-on-start: false

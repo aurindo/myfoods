@@ -1,6 +1,6 @@
 spring:
   cloud:
     config:
-      name: order-service
+      name: order-taker
       uri: http://root:root@localhost:8888
       fail-fast: true
