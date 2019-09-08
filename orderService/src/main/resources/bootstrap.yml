@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    config:
+      name: order-service
+      uri: http://root:root@localhost:8888
+      fail-fast: true
