@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    config:
+      name: email-service
+      uri: http://root:root@localhost:8888
+      fail-fast: true

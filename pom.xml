@@ -11,9 +11,11 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <modules>
-        <!-- <module>config</module>
+        <!--
         <module>discovery</module>
-        <module>gateway</module> -->
+        <module>gateway</module>
+        -->
+        <module>configuration</module>
         <module>orderService</module>
         <module>orderTaker</module>
         <module>emailService</module>
