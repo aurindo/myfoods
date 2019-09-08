@@ -28,5 +28,13 @@ public class OrderServiceImpl implements OrderService {
         return orderUpdated;
     }
 
+    @Override
+    public OrderStatus getStatus(String orderCode) throws OrderException {
+        Order order = orderRepository.findByCode(orderCode).orElseThrow(
+                () -> new OrderException("Order not found", orderCode)
+        );
+        return order.getStatus();
+    }
+
 
 }
