@@ -1,2 +1,2 @@
 # myfoods
-Studing spring cloud
+Studying spring cloud
