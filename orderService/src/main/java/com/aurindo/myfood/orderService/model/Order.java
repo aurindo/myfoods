@@ -35,7 +35,11 @@ public class Order implements Serializable {
 
     public Order() {}
 
-    public Order(String code, List<Product> items, String addressDestination, String userCode) {
+    public Order(
+            @NotNull String code,
+            @NotNull List<Product> items,
+            @NotNull String addressDestination,
+            @NotNull String userCode) {
         this.code = code;
         this.items = items;
         this.addressDestination = addressDestination;
@@ -43,7 +47,12 @@ public class Order implements Serializable {
         this.status = OrderStatus.NEW;
     }
 
-    public Order(String code, List<Product> items, String addressDestination, String userCode, OrderStatus status) {
+    public Order(
+            @NotNull String code,
+            @NotNull List<Product> items,
+            @NotNull String addressDestination,
+            @NotNull String userCode,
+            @NotNull OrderStatus status) {
         this.code = code;
         this.items = items;
         this.addressDestination = addressDestination;

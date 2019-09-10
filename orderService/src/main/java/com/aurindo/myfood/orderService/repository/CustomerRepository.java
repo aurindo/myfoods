@@ -1,0 +1,12 @@
+package com.aurindo.myfood.orderService.repository;
+
+import com.aurindo.myfood.orderService.model.Customer;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
+    Optional<Customer> findByCode(String code);
+}

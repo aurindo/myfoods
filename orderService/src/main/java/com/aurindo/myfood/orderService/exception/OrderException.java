@@ -10,4 +10,7 @@ public class OrderException extends Exception {
         super(message, e);
     }
 
+    public OrderException(String message, String orderCode) {
+        super(message + ": " + orderCode);
+    }
 }
