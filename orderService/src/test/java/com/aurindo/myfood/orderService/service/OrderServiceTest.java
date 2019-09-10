@@ -1,14 +1,17 @@
 package com.aurindo.myfood.orderService.service;
 
 import com.aurindo.myfood.orderService.helper.EmailHelper;
+import com.aurindo.myfood.orderService.model.Customer;
 import com.aurindo.myfood.orderService.model.Order;
 import com.aurindo.myfood.orderService.model.OrderStatus;
 import com.aurindo.myfood.orderService.model.Product;
+import com.aurindo.myfood.orderService.repository.CustomerRepository;
 import com.aurindo.myfood.orderService.repository.OrderRepository;
 import com.aurindo.myfood.orderService.service.impl.OrderServiceImpl;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -17,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {OrderServiceImpl.class})
@@ -27,6 +31,9 @@ public class OrderServiceTest {
 
     @MockBean
     private OrderRepository orderRepository;
+
+    @MockBean
+    private CustomerRepository customerRepository;
 
     @MockBean
     private EmailHelper emailHelper;
@@ -43,14 +50,18 @@ public class OrderServiceTest {
 
         Mockito.when(orderRepository.save(order)).thenReturn(newOrder);
 
+        Customer customer = new Customer("name", "username", "password", "a@a.com");
+        Mockito.when(customerRepository.findByCode(userCode)).thenReturn(Optional.of(customer));
+
         Order savedOrder = orderService.receiveOrder(order);
 
         TestCase.assertNotNull(savedOrder);
         TestCase.assertEquals(OrderStatus.RECEIVED, savedOrder.getStatus());
 
         Mockito.verify(orderRepository, Mockito.times(1)).save(order);
+        Mockito.verify(customerRepository, Mockito.times(1)).findByCode(userCode);
         Mockito.verify(emailHelper, Mockito.times(1)).sendEmail(
-                "aurindo@gmail.com", "Subject Test", "Only a test message");
+                customer.getEmail(), "Subject Test", "Order received " + order.getCode());
     }
 
 }

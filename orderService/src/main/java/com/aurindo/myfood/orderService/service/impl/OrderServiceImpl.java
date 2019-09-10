@@ -38,15 +38,6 @@ public class OrderServiceImpl implements OrderService {
         return orderUpdated;
     }
 
-    private Order processOrder(final Order order) throws OrderException {
-
-        order.getItems().parallelStream().forEach(item -> {
-            item.
-        });
-
-    }
-
-
     @Override
     public OrderStatus getStatus(String orderCode) throws OrderException {
         Order order = orderRepository.findByCode(orderCode).orElseThrow(
