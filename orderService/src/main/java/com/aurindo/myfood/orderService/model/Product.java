@@ -5,6 +5,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name="product")
@@ -19,6 +20,10 @@ public class Product implements Serializable {
     private String code;
 
     @NotNull
+    @Column(unique = true)
+    private String name;
+
+    @NotNull
     @Min(0)
     private BigDecimal price;
 
@@ -26,16 +31,25 @@ public class Product implements Serializable {
     @Min(0)
     private Integer quantity;
 
-    public Product() {}
+    public Product() {
+        this.code = UUID.randomUUID().toString();
+    }
 
-    public Product(String code, BigDecimal price, Integer quantity) {
-        this.code = code;
+    public Product(
+            @NotNull String name,
+            @NotNull BigDecimal price,
+            @NotNull Integer quantity) {
+        this.code = UUID.randomUUID().toString();
         this.price = price;
         this.quantity = quantity;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getCode() {
