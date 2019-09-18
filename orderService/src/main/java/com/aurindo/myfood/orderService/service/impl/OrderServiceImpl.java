@@ -10,6 +10,8 @@ import com.aurindo.myfood.orderService.repository.OrderRepository;
 import com.aurindo.myfood.orderService.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -24,6 +26,7 @@ public class OrderServiceImpl implements OrderService {
     private EmailHelper emailHelper;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Order receiveOrder(final Order order) throws OrderException {
         order.setStatus(OrderStatus.RECEIVED);
         Order orderUpdated = orderRepository.save(order);
