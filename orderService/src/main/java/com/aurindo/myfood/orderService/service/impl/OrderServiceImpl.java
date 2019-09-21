@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.concurrent.CompletableFuture;
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -33,10 +35,20 @@ public class OrderServiceImpl implements OrderService {
 
         Customer customer = customerRepository.findByCode(order.getUserCode()).get();
 
-        emailHelper.sendEmail(
-                customer.getEmail(),
-                "Subject Test",
-                "Order received " + orderUpdated.getCode());
+        CompletableFuture.runAsync(() -> {
+            try {
+                emailHelper.sendEmail(
+                        customer.getEmail(),
+                        "Subject Test",
+                        "Order received " + orderUpdated.getCode());
+                orderUpdated.setStatus(OrderStatus.PROCESSING);
+                orderRepository.save(orderUpdated);
+            } catch (Exception e) {
+                e.printStackTrace();
+                orderUpdated.setStatus(OrderStatus.ERROR);
+                orderRepository.save(orderUpdated);
+            }
+        });
 
         return orderUpdated;
     }
