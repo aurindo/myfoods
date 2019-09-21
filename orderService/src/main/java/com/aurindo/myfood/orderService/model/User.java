@@ -1,7 +1,11 @@
 package com.aurindo.myfood.orderService.model;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -31,6 +35,12 @@ public class User {
     @NotNull
     protected String email;
 
+    @NotNull
+    protected Boolean enable;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    protected Set<String> roles;
+
     public Long getId() {
         return id;
     }
@@ -53,5 +63,13 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
     }
 }
